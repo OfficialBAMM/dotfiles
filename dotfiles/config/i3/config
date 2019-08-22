@@ -1,0 +1,236 @@
+# Xresources      var      value       fallback
+set_from_resource $bg      background  #19043C
+set_from_resource $fg      foreground  #F1F1F1
+set_from_resource $black   color0      #19043C
+set_from_resource $red     color1      #EE79A9
+set_from_resource $green   color2      #8C9440
+set_from_resource $yellow  color3      #DE935F
+set_from_resource $blue    color4      #05C6F1
+set_from_resource $purple  color5      #85678F
+set_from_resource $cyan    color6      #5E8D87
+set_from_resource $grey    color7      #969CD3
+
+# class                 bd    bg  txt    ind   child_bd
+client.focused          $grey $bg $fg    $blue $grey
+client.unfocused        $grey $bg $black $bg   $bg
+client.focused_inactive $grey $bg $black $bg   $bg
+client.urgent           $red  $bg $red   $red  $red
+client.placeholder      $grey $bg $bg    $bg   $bg
+client.background       $bg
+
+# border & title.. Must be set to border pixel for gaps to work
+for_window [class="^.*"] border pixel 1, title_format "<b> %class >> %title </b>"
+
+# gaps
+gaps inner 5
+gaps outer 5
+
+# font
+font pango:monospace 11
+
+# $Mod = Super or Alt?
+set $win Mod4
+set $Mod Mod1
+
+# direction keys
+set $up k
+set $down j
+set $left h
+set $right l
+
+set $WS1M1 "11: "
+set $WS2M1 "12: "
+set $WS3M1 "13: "
+set $WS4M1 "14: "
+set $WS5M1 "15: "
+set $WS6M1 "16: "
+set $WS7M1 "17: "
+set $WS8M1 "18: "
+
+set $WS1M2 "21: "
+set $WS2M2 "22: "
+set $WS3M2 "23: "
+set $WS4M2 "24: "
+set $WS5M2 "25: "
+set $WS6M2 "26: "
+set $WS7M2 "27: "
+set $WS8M2 "28: "
+
+# monitors
+# {%@@ if profile == "laptop" @@%}
+set $Mon1 HDMI1
+set $Mon2 eDP1
+# {%@@ elif profile == "desktop" @@%}
+# {%@@ endif @@%}
+
+#####################################################
+###############     Autostart      ##################
+#####################################################
+
+# run with reload
+#exec_always --no-startup-id al-polybar-session
+exec_always --no-startup-id "sh ~/.config/polybar/launch.sh"
+exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id xrdb -load ~/.Xresources
+
+# run once
+# exec --no-startup-id xfsettingsd
+exec --no-startup-id numlockx on
+
+###########################################################
+#############         Bindings           ##################
+###########################################################
+
+# kill focused window
+bindsym $Mod+Shift+d kill
+
+# launchers
+bindsym $Mod+d exec --no-startup-id rofi_run -r
+
+# core
+bindsym $win+f          exec --no-startup-id firefox
+bindsym $Mod+Return     exec --no-startup-id termite
+
+# logout script
+# {%@@ if profile == "laptop" @@%}
+bindsym $Mod+Shift+x exec --no-startup-id rofi_run -l
+# {%@@ elif profile == "desktop" @@%}
+# {%@@ endif @@%}
+
+# Screenshot
+bindsym Print exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
+
+# audio
+bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext        exec --no-startup-id playerctl next
+bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
+bindsym XF86AudioStop        exec --no-startup-id playerctl stop
+bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
+
+# backlight
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+# Reload configs
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+shift+a restart
+
+# reload the configuration file
+bindsym $mod+shift+c reload
+
+################################################################
+###########          Workspace Bindings          ###############
+################################################################
+
+# workspace assignment
+workspace $WS1M1 output $Mon1
+workspace $WS2M1 output $Mon1
+workspace $WS3M1 output $Mon1
+workspace $WS4M1 output $Mon1
+workspace $WS5M1 output $Mon1
+workspace $WS6M1 output $Mon1
+workspace $WS7M1 output $Mon1
+workspace $WS8M1 output $Mon1
+
+workspace $WS1M2 output $Mon2
+workspace $WS2M2 output $Mon2
+workspace $WS3M2 output $Mon2
+workspace $WS4M2 output $Mon2
+workspace $WS5M2 output $Mon2
+workspace $WS6M2 output $Mon2
+workspace $WS7M2 output $Mon2
+workspace $WSM28 output $Mon2
+
+# switch to workspace
+bindsym $Mod+1 workspace $WS1M1
+bindsym $Mod+2 workspace $WS2M1
+bindsym $Mod+3 workspace $WS3M1
+bindsym $Mod+4 workspace $WS4M1
+bindsym $Mod+5 workspace $WS5M1
+bindsym $Mod+6 workspace $WS6M1
+bindsym $Mod+7 workspace $WS7M1
+bindsym $Mod+8 workspace $WS8M1
+
+bindsym $Mod+q workspace $WS1M2
+bindsym $Mod+w workspace $WS2M2
+bindsym $Mod+e workspace $WS3M2
+bindsym $Mod+r workspace $WS4M2
+bindsym $Mod+t workspace $WS5M2
+bindsym $Mod+y workspace $WS6M2
+bindsym $Mod+u workspace $WS7M2
+bindsym $Mod+i workspace $WS8M2
+
+# move focused container to workspace
+bindsym $Mod+Shift+1 move container to workspace $WS1M1;
+bindsym $Mod+Shift+2 move container to workspace $WS2M1;
+bindsym $Mod+Shift+3 move container to workspace $WS3M1;
+bindsym $Mod+Shift+4 move container to workspace $WS4M1;
+bindsym $Mod+Shift+5 move container to workspace $WS5M1;
+bindsym $Mod+Shift+6 move container to workspace $WS6M1;
+bindsym $Mod+Shift+7 move container to workspace $WS7M1;
+bindsym $Mod+Shift+8 move container to workspace $WS8M1;
+
+bindsym $Mod+Shift+q move container to workspace $WS1M2;
+bindsym $Mod+Shift+w move container to workspace $WS2M2;
+bindsym $Mod+Shift+e move container to workspace $WS3M2;
+bindsym $Mod+Shift+r move container to workspace $WS4M2;
+bindsym $Mod+Shift+t move container to workspace $WS5M2;
+bindsym $Mod+Shift+y move container to workspace $WS6M2;
+bindsym $Mod+Shift+u move container to workspace $WS7M2;
+bindsym $Mod+Shift+i move container to workspace $WS8M2;
+########################################################
+############      container/window control  ############
+########################################################
+
+# Use $Mod+Mouse to drag windows
+floating_modifier $Mod
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+shift+$left  move left
+bindsym $mod+shift+$down  move down
+bindsym $Mod+Shift+$up    move up
+bindsym $Mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $Mod+Shift+Up    move up
+bindsym $Mod+Shift+Down  move down
+bindsym $Mod+Shift+Left  move left
+bindsym $Mod+Shift+Right move right
+
+bindsym $Mod+f fullscreen toggle
+
+bindsym $Mod+space floating toggle
+
+######################################################
+###############      Border & Gaps     ###############
+######################################################
+
+new_window normal
+new_float  normal
+
+hide_edge_borders both
+
+###################################################
+############    application settings   ############
+###################################################
+
+# focus, floating, & sticky
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+for_window [window_role="(?i)(?:pop-up|setup)"]      floating enable
+
+popup_during_fullscreen smart
+
+exec --no-startup-id i3-msg workspace $WSM1

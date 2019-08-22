@@ -1,0 +1,33 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+dotfiles:
+  d_i3:
+    src: config/i3
+    dst: ~/.config/i3
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  d_zsh:
+    src: config/zsh
+    dst: ~/.config/zsh
+  f_xresources:
+    src: Xresources
+    dst: ~/.Xresources
+  d_polybar:
+    src: config/polybar
+    dst: ~/.config/polybar
+profiles:
+  laptop:
+    dotfiles:
+    - d_i3
+    - d_nvim
+    - d_zsh
+    - f_xresources
+    - d_polybar

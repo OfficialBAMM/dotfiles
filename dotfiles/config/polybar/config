@@ -1,0 +1,183 @@
+;=====================================================
+;     Colors & Settings
+;=====================================================
+
+[colors]
+background = #1c2023
+foreground = #a4a4a4
+moderate = #ebcb8b
+urgent = #bf616a
+trim = #919ba0
+blue = #a2d1ec
+purple = #b48ead
+border = #c0c5ce
+
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+compositing-background = source
+compositing-foreground = source
+compositing-overline = source
+compositing-underline = source
+compositing-border = source
+screenchange-reload = true
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+;=====================================================
+;    Master Bar
+;=====================================================
+
+[bar/i3-bar]
+monitor = ${env:MONITOR}
+
+width = 100%
+height = 24
+border-size = 0
+border-top-size = 0
+border-bottom-size = 1
+radius = 0
+bottom = false
+line-size = 3
+
+; monospace is an aliased font name, see ~/.config/fontconfig/fonts.conf
+font-0 = "monospace:size=10:antialias=false;2"
+font-1 = "Font Awesome 5 Brands:pixelsize=11;1"
+font-2 = "MaterialIcons:size=10:antialias=false;2"
+font-3 = "icomoon:size=10:antialias=false;2"
+font-4 = "Ubuntu Mono Nerd Font:size=10:antialias=false;2"
+
+offset-x = 0
+offset-y = 0
+fixed-center = true
+border-color = ${colors.border}
+background = ${colors.background}
+foreground = ${colors.foreground}
+module-margin = 0
+padding-right = 0
+padding-left = 0
+separator = │
+
+tray-position=right
+
+; shows which modules have click actions
+cursor-click = pointer
+
+modules-left = i3
+modules-center = clock
+
+; {%@@ if profile == "laptop" @@%}
+modules-right = battery network volume
+; {%@@ if profile == "desktop" @@%}
+; modules-right = volume
+; {%@@ endif @@%}
+
+;;;;;;;;;;;;;;;;;;;
+;; i3 Workspaces ;;
+;;;;;;;;;;;;;;;;;;;
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+fuzzy-match = true
+ws-icon-default = 
+format = <label-state><label-mode>
+label-mode = %mode%
+label-mode-padding = 2
+label-focused = %index% %name%
+label-focused-padding = 2
+label-unfocused = %index% %name%
+label-unfocused-padding = 2
+label-visible = %index% %name%
+label-visible-padding = 2
+label-urgent = %index% %name%
+label-urgent-padding = 2
+label-mode-underline = ${colors.urgent}
+label-focused-underline = ${colors.blue}
+label-visible-underline = ${colors.purple}
+label-urgent-underline = ${colors.urgent}
+
+
+;;;;;;;;;;;;;
+;; BATTERY ;;
+;;;;;;;;;;;;;
+[module/battery]
+type = internal/battery
+; Use $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC
+full-at = 99
+poll-interval = 5
+time-format = %H:%M
+
+format-charging    = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full        = <ramp-capacity> <label-full>
+
+label-charging = %{A1:xfce4-power-manager-settings & disown:}%percentage%% %{A}
+label-discharging = %{A1:xfce4-power-manager-settings & disown:}%percentage%% %{A}
+label-full = %{A1:xfce4-power-manager-settings & disown:}%percentage%% %{A}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-0-foreground = ${colors.urgent}
+ramp-capacity-1-foreground = ${colors.moderate}
+ramp-capacity-foreground   = ${colors.blue}
+
+bar-capacity-width = 10
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
+animation-charging-framerate = 750
+
+;;;;;;;;;;;;
+;; Volume ;;
+;;;;;;;;;;;;
+[module/volume]
+type = internal/alsa
+master-mixer = Master
+format-volume-padding = 1
+label-volume-foreground = ${colors.foreground}
+label-volume  = %{A3:pavucontrol & disown:}%percentage:2%% %{A}
+format-volume = <ramp-volume> <label-volume>
+label-muted   = " muted "
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+label-muted-foreground = #888
+ramp-volume-0-foreground = ${colors.trim}
+ramp-volume-1-foreground = ${colors.blue}
+ramp-volume-2-foreground = ${colors.moderate}
+ramp-volume-3-foreground = ${colors.urgent}
+
+;;;;;;;;;;;
+;; Clock ;;
+;;;;;;;;;;;
+[module/clock]
+type = internal/date
+format = <label>
+interval = 5
+time = %R
+label = %{A1:gsimplecal & disown:} %{A3:gsimplecal & disown:} %time%%{A} %{A}
+
+;;;;;;;;;;;;;
+;; Network ;;
+;;;;;;;;;;;;;
+[module/network]
+type = custom/script
+exec = check-network
+click-left = networkmanager_dmenu &
+click-right = networkmanager_dmenu &
+label-padding = 1
+tail = true
+
