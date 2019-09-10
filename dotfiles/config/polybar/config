@@ -1,5 +1,5 @@
 ;=====================================================
-;     Colors & Settings
+
 ;=====================================================
 
 [colors]
@@ -9,6 +9,7 @@ moderate = #ebcb8b
 urgent = #bf616a
 trim = #919ba0
 blue = #a2d1ec
+accent = #a2d1ec
 purple = #b48ead
 border = #c0c5ce
 
@@ -42,12 +43,8 @@ radius = 0
 bottom = false
 line-size = 3
 
-; monospace is an aliased font name, see ~/.config/fontconfig/fonts.conf
-font-0 = "monospace:size=10:antialias=false;2"
-font-1 = "Font Awesome 5 Brands:pixelsize=11;1"
-font-2 = "MaterialIcons:size=10:antialias=false;2"
-font-3 = "icomoon:size=10:antialias=false;2"
-font-4 = "Ubuntu Mono Nerd Font:size=10:antialias=false;2"
+font-0 = "Ubuntu Condensed:size=10;2"
+font-1 = Material Icons:size=18;2
 
 offset-x = 0
 offset-y = 0
@@ -65,42 +62,85 @@ tray-position=right
 ; shows which modules have click actions
 cursor-click = pointer
 
-modules-left = i3
+modules-left = workspaces
 modules-center = clock
 
 ; {%@@ if profile == "laptop" @@%}
 modules-right = battery network volume
-; {%@@ if profile == "desktop" @@%}
-; modules-right = volume
+; {%@@ elif profile == "sjaak" @@%}
+modules-right = volume
 ; {%@@ endif @@%}
 
 ;;;;;;;;;;;;;;;;;;;
 ;; i3 Workspaces ;;
 ;;;;;;;;;;;;;;;;;;;
-[module/i3]
-type = internal/i3
-pin-workspaces = true
-strip-wsnumbers = true
-index-sort = true
-enable-click = true
-fuzzy-match = true
-ws-icon-default = 
-format = <label-state><label-mode>
-label-mode = %mode%
-label-mode-padding = 2
-label-focused = %index% %name%
-label-focused-padding = 2
-label-unfocused = %index% %name%
-label-unfocused-padding = 2
-label-visible = %index% %name%
-label-visible-padding = 2
-label-urgent = %index% %name%
-label-urgent-padding = 2
-label-mode-underline = ${colors.urgent}
-label-focused-underline = ${colors.blue}
-label-visible-underline = ${colors.purple}
-label-urgent-underline = ${colors.urgent}
 
+[module/workspaces]
+type = internal/xworkspaces
+
+pin-workspaces = true
+
+; icon-[0-9]+ = <desktop-name>;<icon>
+; NOTE: The desktop name needs to match the name configured by the WM
+; You can get a list of the defined desktops using:
+; $ xprop -root _NET_DESKTOP_NAMES
+
+icon-0 = 11;
+
+icon-default = x
+
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(active|urgent|occupied|empty)>
+; Default: <label-state>
+format = <label-state>
+format-padding = 0
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-active = %icon%
+label-active-foreground = ${colors.foreground}
+label-active-background = ${colors.background}
+label-active-overline = ${colors.accent}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-occupied = %icon%
+label-occupied-underline = ${colors.foreground}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-urgent = %icon%
+label-urgent-foreground = ${colors.purple}
+label-urgent-background = ${colors.background}
+;;label-urgent-underline = ${colors.purple}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground}
+
+label-active-padding = 2
+label-urgent-padding = 2
+label-occupied-padding = 2
+label-empty-padding = 2
 
 ;;;;;;;;;;;;;
 ;; BATTERY ;;

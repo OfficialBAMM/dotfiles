@@ -26,7 +26,7 @@ gaps inner 5
 gaps outer 5
 
 # font
-font pango:monospace 11
+font pango:Anonymous Pro, 8
 
 # $Mod = Super or Alt?
 set $win Mod4
@@ -38,29 +38,33 @@ set $down j
 set $left h
 set $right l
 
-set $WS1M1 "11: "
-set $WS2M1 "12: "
-set $WS3M1 "13: "
-set $WS4M1 "14: "
-set $WS5M1 "15: "
-set $WS6M1 "16: "
-set $WS7M1 "17: "
-set $WS8M1 "18: "
+set $WS1M1 "11"
+set $WS2M1 "12"
+set $WS3M1 "13"
+set $WS4M1 "14"
+set $WS5M1 "15"
+set $WS6M1 "16"
+set $WS7M1 "17"
+set $WS8M1 "18"
 
-set $WS1M2 "21: "
-set $WS2M2 "22: "
-set $WS3M2 "23: "
-set $WS4M2 "24: "
-set $WS5M2 "25: "
-set $WS6M2 "26: "
-set $WS7M2 "27: "
-set $WS8M2 "28: "
+set $WS1M2 "21"
+set $WS2M2 "22"
+set $WS3M2 "23"
+set $WS4M2 "24"
+set $WS5M2 "25"
+set $WS6M2 "26"
+set $WS7M2 "27"
+set $WS8M2 "28"
 
 # monitors
 # {%@@ if profile == "laptop" @@%}
+
 set $Mon1 HDMI1
 set $Mon2 eDP1
-# {%@@ elif profile == "desktop" @@%}
+# {%@@ elif profile == "sjaak" @@%}
+
+set $Mon1 DP-0
+set $Mon2 HDMI-0
 # {%@@ endif @@%}
 
 #####################################################
@@ -68,13 +72,11 @@ set $Mon2 eDP1
 #####################################################
 
 # run with reload
-#exec_always --no-startup-id al-polybar-session
 exec_always --no-startup-id "sh ~/.config/polybar/launch.sh"
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id xrdb -load ~/.Xresources
 
 # run once
-# exec --no-startup-id xfsettingsd
 exec --no-startup-id numlockx on
 
 ###########################################################
@@ -85,7 +87,13 @@ exec --no-startup-id numlockx on
 bindsym $Mod+Shift+d kill
 
 # launchers
+# {%@@ if profile == "laptop" @@%}
+
 bindsym $Mod+d exec --no-startup-id rofi_run -r
+# {%@@ elif profile == "sjaak" @@%}
+
+bindsym $Mod+d exec --no-startup-id "rofi -show run"
+# {%@@ endif @@%}
 
 # core
 bindsym $win+f          exec --no-startup-id firefox
@@ -93,8 +101,11 @@ bindsym $Mod+Return     exec --no-startup-id termite
 
 # logout script
 # {%@@ if profile == "laptop" @@%}
+
 bindsym $Mod+Shift+x exec --no-startup-id rofi_run -l
-# {%@@ elif profile == "desktop" @@%}
+# {%@@ elif profile == "sjaak" @@%}
+
+bindsym $mod+Shift+x exec "sh $HOME/.local/bin/shutdown.sh"
 # {%@@ endif @@%}
 
 # Screenshot
@@ -214,6 +225,13 @@ bindsym $Mod+f fullscreen toggle
 
 bindsym $Mod+space floating toggle
 
+mode "gaming" {
+    bindsym $mod+Shift+g mode "default"
+}
+
+# Enter resize mode
+bindsym $mod+Shift+g mode "gaming"
+
 ######################################################
 ###############      Border & Gaps     ###############
 ######################################################
@@ -227,10 +245,24 @@ hide_edge_borders both
 ############    application settings   ############
 ###################################################
 
-# focus, floating, & sticky
-for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
 for_window [window_role="(?i)(?:pop-up|setup)"]      floating enable
+
+for_window [class="Spotify"]        move to workspace $WS2M2
+
+assign [class="discord"]            $WS1M2
+assign [class="Steam"]              $WS3M1
+assign [class="Lutris"]             $WS4M1
+assign [instance="battle.net.exe"]  $WS4M1
 
 popup_during_fullscreen smart
 
-exec --no-startup-id i3-msg workspace $WSM1
+# {%@@ if profile == "sjaak" @@%}
+
+exec --no-startup-id discord
+exec --no-startup-id lutris
+exec --no-startup-id spotify
+exec --no-startup-id steam
+# {%@@ endif @@%}
+
+exec --no-startup-id i3-msg 'workspace $WS1M1; exec termite; exec termite; exec termite'
+exec --no-startup-id i3-msg 'workspace $WS2M1; exec firefox'

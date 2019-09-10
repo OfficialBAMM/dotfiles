@@ -14,9 +14,13 @@ dotfiles:
   d_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+    upignore:
+    - "*/plugged"
   d_zsh:
     src: config/zsh
     dst: ~/.config/zsh
+    upignore:
+    - "*/.zcompdump"
   f_xresources:
     src: Xresources
     dst: ~/.Xresources
@@ -25,6 +29,13 @@ dotfiles:
     dst: ~/.config/polybar
 profiles:
   laptop:
+    dotfiles:
+    - d_i3
+    - d_nvim
+    - d_zsh
+    - f_xresources
+    - d_polybar
+  sjaak:
     dotfiles:
     - d_i3
     - d_nvim
