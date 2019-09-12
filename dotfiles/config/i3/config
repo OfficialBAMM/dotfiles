@@ -59,8 +59,8 @@ set $WS8M2 "28"
 # monitors
 # {%@@ if profile == "laptop" @@%}
 
-set $Mon1 HDMI1
-set $Mon2 eDP1
+set $Mon1 HDMI-2
+set $Mon2 eDP-1
 # {%@@ elif profile == "sjaak" @@%}
 
 set $Mon1 DP-0
@@ -87,26 +87,14 @@ exec --no-startup-id numlockx on
 bindsym $Mod+Shift+d kill
 
 # launchers
-# {%@@ if profile == "laptop" @@%}
-
-bindsym $Mod+d exec --no-startup-id rofi_run -r
-# {%@@ elif profile == "sjaak" @@%}
-
 bindsym $Mod+d exec --no-startup-id "rofi -show run"
-# {%@@ endif @@%}
 
 # core
 bindsym $win+f          exec --no-startup-id firefox
 bindsym $Mod+Return     exec --no-startup-id termite
 
 # logout script
-# {%@@ if profile == "laptop" @@%}
-
-bindsym $Mod+Shift+x exec --no-startup-id rofi_run -l
-# {%@@ elif profile == "sjaak" @@%}
-
 bindsym $mod+Shift+x exec "sh $HOME/.local/bin/shutdown.sh"
-# {%@@ endif @@%}
 
 # Screenshot
 bindsym Print exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
@@ -262,6 +250,11 @@ exec --no-startup-id discord
 exec --no-startup-id lutris
 exec --no-startup-id spotify
 exec --no-startup-id steam
+
+# {%@@ elif profile == "laptop" @@%}
+
+exec_once --no-startup-id nm-applet
+
 # {%@@ endif @@%}
 
 exec --no-startup-id i3-msg 'workspace $WS1M1; exec termite; exec termite; exec termite'

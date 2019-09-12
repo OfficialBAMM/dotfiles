@@ -33,6 +33,9 @@ Plug 'joshdick/onedark.vim'
 " A thingy at the bottom
 Plug 'itchyny/lightline.vim'
 
+" Because the qoues are funny / starts vim with a fancy screen
+Plug 'mhinz/vim-startify'
+
 "-------------------------------FUNCTIONAL
 " linter
 Plug 'w0rp/ale'
@@ -43,6 +46,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " To see npm versions in a package.json
 Plug 'meain/vim-package-info'
 
+" Commenting plugin by Tim!
+Plug 'tpope/vim-commentary'
+
 " The one and only
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -50,13 +56,11 @@ Plug 'junegunn/fzf.vim'
 " experimental, dont know if i'll use it enough
 Plug 'tpope/vim-fugitive'
 
-" commenting
-Plug 'tyru/caw.vim'
-
 call plug#end()
 
 set background=dark
 colorscheme onedark
+
 " ------ plugin options ------
 map <C-n> :NERDTreeToggle<CR>
 
@@ -68,7 +72,9 @@ let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 
 " ------ commands ------
-command! W execute 'silent w !sudo tee % >/dev/null' | edit!
+"
+command Wsudo w !sudo tee "%" > /dev/null
+command W w
 
 " ------ basic maps ------
 "These are to cancel the default behavior of d, D, c, C

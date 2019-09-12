@@ -66,8 +66,10 @@ modules-left = workspaces
 modules-center = clock
 
 ; {%@@ if profile == "laptop" @@%}
+
 modules-right = battery network volume
 ; {%@@ elif profile == "sjaak" @@%}
+
 modules-right = volume
 ; {%@@ endif @@%}
 
@@ -76,71 +78,68 @@ modules-right = volume
 ;;;;;;;;;;;;;;;;;;;
 
 [module/workspaces]
-type = internal/xworkspaces
+type = internal/i3
 
+; Only show workspaces defined on the same output as the bar
 pin-workspaces = true
 
-; icon-[0-9]+ = <desktop-name>;<icon>
-; NOTE: The desktop name needs to match the name configured by the WM
-; You can get a list of the defined desktops using:
-; $ xprop -root _NET_DESKTOP_NAMES
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = false
 
-icon-0 = 11;
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
 
-icon-default = x
+; ws-icon-[0-9]+ = label;icon
+; NOTE: The label needs to match the name of the i3 workspace
+ws-icon-0 = 11;⠁
+ws-icon-1 = 12;⠃
+ws-icon-2 = 13;⠇
+ws-icon-3 = 14;⡇
+ws-icon-4 = 15;⡏
+ws-icon-5 = 16;⡟
+ws-icon-6 = 17;⡿
+ws-icon-7 = 18;⣿
+
+ws-icon-8 = 21;⠁
+ws-icon-9 = 22;⠃
+ws-icon-10 = 23;⠇
+ws-icon-11 = 24;⡇
+ws-icon-12 = 25;⡏
+ws-icon-13 = 26;⡟
+ws-icon-14 = 27;⡿
+ws-icon-15 = 28;⣿
+ws-icon-default = ⣝
 
 ; Available tags:
-;   <label-monitor>
-;   <label-state> - gets replaced with <label-(active|urgent|occupied|empty)>
-; Default: <label-state>
-format = <label-state>
-format-padding = 0
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
 
-; Available tokens:
-;   %name%
-; Default: %name%
-label-monitor = %name%
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+; label-focused-underline = #fba922
+label-focused-padding = 4
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-active = %icon%
-label-active-foreground = ${colors.foreground}
-label-active-background = ${colors.background}
-label-active-overline = ${colors.accent}
+label-unfocused = %icon%
+label-unfocused-padding = 4
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-occupied = %icon%
-label-occupied-underline = ${colors.foreground}
+label-visible = %icon%
+label-visible-padding = 4
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
 label-urgent = %icon%
-label-urgent-foreground = ${colors.purple}
-label-urgent-background = ${colors.background}
-;;label-urgent-underline = ${colors.purple}
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-empty = %icon%
-label-empty-foreground = ${colors.foreground}
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 2
+label-separator-foreground = #ffffff
 
-label-active-padding = 2
-label-urgent-padding = 2
-label-occupied-padding = 2
-label-empty-padding = 2
 
 ;;;;;;;;;;;;;
 ;; BATTERY ;;
@@ -220,4 +219,3 @@ click-left = networkmanager_dmenu &
 click-right = networkmanager_dmenu &
 label-padding = 1
 tail = true
-
