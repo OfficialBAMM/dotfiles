@@ -6,7 +6,7 @@ autoload -U colors && colors
 
 _defaults_()
 {
-    : ${GIT_PROMPT_SOURCE="$HOME/.zsh/themes/git_prompt/git_prompt.zsh"}
+    : ${GIT_PROMPT_SOURCE="$ZDOTDIR/themes/git_prompt/git_prompt.zsh"}
     : ${PROMPT_USERFMT=""}
     : ${PROMPT_TIMEFMT="%*"}
     local tempv=$'\n'

@@ -1,3 +1,7 @@
+actions:
+  pre:
+    nvim-plug-install: test -e ~/.local/share/nvim/site/autoload/plug.vim || (curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
+    nvim-plug: nvim +PlugInstall +qall
 config:
   backup: true
   banner: true
@@ -16,6 +20,9 @@ dotfiles:
     dst: ~/.config/nvim
     upignore:
     - "*/plugged"
+    actions:
+    - nvim-plug-install
+    - nvim-plug
   d_zsh:
     src: config/zsh
     dst: ~/.config/zsh

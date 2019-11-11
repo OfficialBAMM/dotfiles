@@ -1,21 +1,59 @@
-" system clipboard (requires +clipboard)
 set clipboard^=unnamed,unnamedplus
 
-" additional settings
-set modeline                " enable vim modelines
-set hlsearch                " highlight search items
-set incsearch               " searches are performed as you type
-set number relativenumber   " enable line numbers
-set confirm                 " ask confirmation like save before quit.
-set wildmenu                " Tab completion menu when using command mode
-set expandtab               " Tab key inserts spaces not tabs
-set softtabstop=4           " spaces to enter for each tab
-set shiftwidth=4            " amount of spaces for indentation
-set shortmess+=aAcIws       " Hide or shorten certain messages
-set mouse=a                 " enable mouse
-syntax enable               " syntax highlighting
-set linebreak breakindent
-set list listchars=tab:>>,trail:~
+set nocompatible
+
+filetype plugin indent on  " Load plugins according to detected filetype.
+syntax on                  " Enable syntax highlighting.
+set mouse=a                     " enable using the mouse if terminal emulator
+
+set autoindent             " Indent according to previous line.
+set copyindent             " copy the previous indentation on autoindenting
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
+
+set backspace   =indent,eol,start  " Make backspace work as you would expect.
+set hidden                 " Switch between buffers without having to save first.
+set laststatus  =2         " Always show statusline.
+set display     =lastline  " Show as much as possible of the last line.
+
+set showmode               " Show current mode in command-line.
+set showcmd                " Show already typed keys when more are expected.
+
+set incsearch              " Highlight while searching with / or ?.
+set hlsearch               " Keep matches highlighted.
+set wrapscan               " Searches wrap around end-of-file.
+
+set ttyfast                " Faster redrawing.
+set lazyredraw             " Only redraw when necessary.
+
+set splitbelow             " Open new windows below the current window.
+set splitright             " Open new windows right of the current window.
+
+set number relativenumber  " enable line numbers
+set cursorline             " Find the current line quickly.
+set report      =0         " Always report changed lines.
+set synmaxcol   =200       " Only highlight the first 200 columns.
+set scrolloff=4            " keep 4 lines off the edges of the screen when scrolling
+set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
+
+set nobackup                    " do not keep backup files, it's 70's style cluttering
+set nowritebackup               " do not write out changes via backup files
+set noswapfile                  " do not write annoying intermediate swap files,
+set undofile                    " keep a persistent undo file
+set undodir=$HOME/.local/share/nvim/undo
+
+
+"------  Disable Annoying Features  ------
+" Wtf is Ex Mode anyways?
+nnoremap Q <nop>
+
+" Annoying window
+map q: :q
+
+" Keep the cursor in place while joining lines
+nnoremap J mzJ`z
 
 let g:mapleader = "\<Space>"
 
@@ -63,6 +101,8 @@ colorscheme onedark
 
 " ------ plugin options ------
 map <C-n> :NERDTreeToggle<CR>
+" Use a single click to fold/unfold directories and a double click to open files
+let NERDTreeMouseMode=2
 
 "------------------- ALE
 " The fixers ALE is allowed to use
@@ -108,6 +148,8 @@ nnoremap N Nzzzv
 " re-visual text after changing indent
 vnoremap > >gv
 vnoremap < <gv
+nnoremap < <<
+nnoremap > >>
 
 " gj/k but preserve numbered jumps ie: 12j or 45k
 nmap <buffer><silent><expr>j v:count ? 'j' : 'gj'
@@ -129,11 +171,16 @@ nnoremap <C-p> :Files<CR>
 
 nnoremap <C-f> :Ag<CR>
 
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+
+nnoremap <Leader>; A;<esc>
+
 " ------ autocmd ------
 " Set tabsize on js/vue files
 autocmd filetype javascript setlocal ts=2 sts=2 sw=2
-autocmd FileType vue syntax sync fromstart
-autocmd Filetype vue setlocal ts=2 sts=2 sw=2
+autocmd filetype vue syntax sync fromstart
+autocmd filetype vue setlocal ts=2 sts=2 sw=2
 
 " Reload changes if file changed outside of vim requires autoread
 augroup load_changed_file
@@ -150,7 +197,7 @@ augroup END
 
 augroup load_vimrc_when_changed
     au!
-    au BufWritePost $XDG_CONFIG_HOME/nvim/init.vim so $XDG_CONFIG_HOME/nvim/init.vim 
+    au BufWritePost $XDG_CONFIG_HOME/nvim/init.vim so $XDG_CONFIG_HOME/nvim/init.vim
 augroup END
 
 " Quick run via <F5>
