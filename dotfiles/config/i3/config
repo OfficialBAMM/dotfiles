@@ -250,10 +250,6 @@ exec --no-startup-id discord
 exec --no-startup-id lutris
 exec --no-startup-id steam
 
-# {%@@ elif profile == "laptop" @@%}
-
-exec_once --no-startup-id nm-applet
-
 # {%@@ endif @@%}
 
 exec --no-startup-id i3-msg 'workspace $WS1M1; exec termite; exec termite; exec termite'
