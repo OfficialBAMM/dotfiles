@@ -248,7 +248,6 @@ popup_during_fullscreen smart
 
 exec --no-startup-id discord
 exec --no-startup-id lutris
-exec --no-startup-id spotify
 exec --no-startup-id steam
 
 # {%@@ elif profile == "laptop" @@%}
@@ -259,3 +258,4 @@ exec_once --no-startup-id nm-applet
 
 exec --no-startup-id i3-msg 'workspace $WS1M1; exec termite; exec termite; exec termite'
 exec --no-startup-id i3-msg 'workspace $WS2M1; exec firefox'
+exec --no-startup-id spotify

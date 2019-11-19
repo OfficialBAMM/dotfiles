@@ -7,6 +7,6 @@ i3
 polybar
 termite
 firefox
-ttf-material-design-icons
+ttf-material-design-icons-git
 networkmanager_dmenu
 gsimplecal
