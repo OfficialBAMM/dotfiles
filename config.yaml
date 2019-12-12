@@ -1,6 +1,7 @@
 actions:
   pre:
-    nvim-plug-install: test -e ~/.local/share/nvim/site/autoload/plug.vim || (curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
+    nvim-plug-install: test -e ~/.local/share/nvim/site/autoload/plug.vim || (curl
+      -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
     nvim-plug: nvim +PlugInstall +qall
 config:
   backup: true
@@ -19,7 +20,7 @@ dotfiles:
     src: config/nvim
     dst: ~/.config/nvim
     upignore:
-    - "*/plugged"
+    - '*/plugged'
     actions:
     - nvim-plug-install
     - nvim-plug
@@ -27,13 +28,16 @@ dotfiles:
     src: config/zsh
     dst: ~/.config/zsh
     upignore:
-    - "*/.zcompdump"
+    - '*/.zcompdump'
   f_xresources:
     src: Xresources
     dst: ~/.Xresources
   d_polybar:
     src: config/polybar
     dst: ~/.config/polybar
+  f_config:
+    src: config/termite/config
+    dst: ~/.config/termite/config
 profiles:
   laptop:
     dotfiles:
@@ -42,6 +46,7 @@ profiles:
     - d_zsh
     - f_xresources
     - d_polybar
+    - f_config
   sjaak:
     dotfiles:
     - d_i3
