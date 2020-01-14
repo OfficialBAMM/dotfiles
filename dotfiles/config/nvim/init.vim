@@ -76,7 +76,7 @@ Plug 'mhinz/vim-startify'
 
 "-------------------------------FUNCTIONAL
 " linter
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " File openeer because im too lazy to learn it the native way
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }

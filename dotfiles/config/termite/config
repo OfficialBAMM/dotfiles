@@ -41,7 +41,7 @@ scrollback_lines = 10000
 #scrollbar = off
 
 [colors]
-background  = #262626
+background = #262626
 foreground = #a4a4a4
 
 # If both of these are unset, cursor falls back to the foreground color,

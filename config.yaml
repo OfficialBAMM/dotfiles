@@ -38,6 +38,9 @@ dotfiles:
   f_config:
     src: config/termite/config
     dst: ~/.config/termite/config
+  f_gsimplecal_config:
+    src: config/gsimplecal/config
+    dst: ~/.config/gsimplecal/config
 profiles:
   laptop:
     dotfiles:
@@ -47,6 +50,7 @@ profiles:
     - f_xresources
     - d_polybar
     - f_config
+    - f_gsimplecal_config
   sjaak:
     dotfiles:
     - d_i3
