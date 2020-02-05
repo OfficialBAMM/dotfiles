@@ -329,6 +329,7 @@ function! s:compile_and_run()
     exec 'w'
     if &filetype == 'c'
         exec "! gcc % -o %<; time ./%<"
+        exec "! gcc % -o %<; ./%<"
     elseif &filetype == 'cpp'
        exec "! g++ -std=c++11 % -o %<; time ./%<"
     elseif &filetype == 'java'
