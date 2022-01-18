@@ -14,6 +14,10 @@ export LESS_TERMCAP_so=$'\E[47;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[32m'
 
+export EDITOR=nvim
+
+export TERM=xterm-256color
+
 if [[ $TERM == 'linux' ]]; then
     # linux console 0-15 colors
     colors=(

@@ -1,0 +1,40 @@
+{
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.useQuickfixForLocations": true,
+
+  // coc-explorer
+  // General config
+  "explorer.width": 30,
+  "explorer.previewAction.onHover": false,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.keyMappings.global": {
+    "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+    "o": ["wait", "expandable?", "cd", "open"]
+  },
+
+  // Show some different text
+  "explorer.buffer.root.template": "[icon & 1] OPEN EDITORS",
+  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
+  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
+
+  // Images and shit
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.source": "builtin",
+
+  // Open upstream directories
+  "explorer.file.reveal.whenOpen": true,
+  "explorer.file.reveal.auto": true,
+
+  // Change directory when cd'ing in coc-explorer
+  "explorer.file.cdCommand": "cd",
+  "explorer.root.strategies": ["cwd"],
+
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "json",
+    "yml",
+    "javascript"
+  ]
+}

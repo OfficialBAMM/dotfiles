@@ -1,6 +1,8 @@
 #!/usr/bin/zsh
 alias ll='ls -lAh'
 
+alias cs='cd ~/sites/'
+
 alias mkx='chmod +x'
 alias mkdir='mkdir -pv'
 alias grep='grep --color=auto'
@@ -49,3 +51,9 @@ alias timer='time read -p "Press enter to stop"'
 # shellcheck disable=2142
 alias xp='xprop | awk -F\"'" '/CLASS/ {printf \"NAME = %s\nCLASS = %s\n\", \$2, \$4}'"
 alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+
+alias y='yarn '
+alias yd='yarn dev'
+alias yi='yarn install'
+alias yg='yarn generate'
+

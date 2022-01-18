@@ -57,24 +57,18 @@ set $WS7M2 "27"
 set $WS8M2 "28"
 
 # monitors
-# {%@@ if profile == "laptop" @@%}
-
-set $Mon1 HDMI-2
-set $Mon2 eDP-1
-# {%@@ elif profile == "sjaak" @@%}
-
-set $Mon1 DP-0
-set $Mon2 HDMI-0
-# {%@@ endif @@%}
-
+# 
+set $Mon2 DP2
+set $Mon1 eDP1
+# 
 #####################################################
 ###############     Autostart      ##################
 #####################################################
 
 # run with reload
+exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id "sh ~/.config/polybar/launch.sh"
 exec_always --no-startup-id nitrogen --restore
-exec_always --no-startup-id xrdb -load ~/.Xresources
 
 # run once
 exec --no-startup-id numlockx on
@@ -88,10 +82,11 @@ bindsym $Mod+Shift+d kill
 
 # launchers
 bindsym $Mod+d exec --no-startup-id "rofi -show run"
+bindsym $Mod+s exec --no-startup-id "clipmenu"
 
 # core
 bindsym $win+f          exec --no-startup-id firefox
-bindsym $Mod+Return     exec --no-startup-id termite
+bindsym $Mod+Return     exec --no-startup-id alacritty
 
 # logout script
 bindsym $mod+Shift+x exec "sh $HOME/.local/bin/shutdown.sh"
@@ -217,6 +212,11 @@ mode "gaming" {
     bindsym $mod+Shift+g mode "default"
 }
 
+bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+
 # Enter resize mode
 bindsym $mod+Shift+g mode "gaming"
 
@@ -235,23 +235,15 @@ hide_edge_borders both
 
 for_window [window_role="(?i)(?:pop-up|setup)"]      floating enable
 
-for_window [class="Spotify"]        move to workspace $WS2M2
-
-assign [class="discord"]            $WS1M2
+assign [class="Spotify"]            $WS1M1
+assign [class="discord"]            $WS1M1
 assign [class="Steam"]              $WS3M1
 assign [class="Lutris"]             $WS4M1
-assign [instance="battle.net.exe"]  $WS4M1
 
 popup_during_fullscreen smart
 
-# {%@@ if profile == "sjaak" @@%}
+exec --no-startup-id i3-msg 'workspace $WS1M2; exec termite; exec firefox;'
+exec --no-startup-id i3-msg 'workspace $WS2M2; exec tableplus;'
+exec --no-startup-id i3-msg 'workspace $WS1M1; exec spotify;'
+exec --no-startup-id i3-msg 'workspace $WS1M1; exec discord;'
 
-exec --no-startup-id discord
-exec --no-startup-id lutris
-exec --no-startup-id steam
-
-# {%@@ endif @@%}
-
-exec --no-startup-id i3-msg 'workspace $WS1M1; exec termite; exec termite; exec termite'
-exec --no-startup-id i3-msg 'workspace $WS2M1; exec firefox'
-exec --no-startup-id spotify
