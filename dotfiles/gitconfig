@@ -1,0 +1,24 @@
+[user]
+        email = robbertritsema@protonmail.com
+	name = OfficialBAMM
+[maintenance]
+	repo = /home/sjaak/.config/zsh/znap-plugins/zsh-snap
+	repo = /home/sjaak/.config/zsh/znap-plugins/zsh-autocomplete
+	repo = /home/sjaak/Git/pure
+	repo = /home/sjaak/Git/zsh-autocomplete
+	repo = /home/sjaak/Git/zsh-autosuggestions
+	repo = /home/sjaak/Git/zsh-snap
+	repo = /home/sjaak/Git/zsh-syntax-highlighting
+	repo = /home/sjaak/.config/zsh/zsh-plugins/pure
+	repo = /home/sjaak/.config/zsh/zsh-plugins/zsh-autocomplete
+	repo = /home/sjaak/.config/zsh/zsh-plugins/zsh-autosuggestions
+	repo = /home/sjaak/.config/zsh/zsh-plugins/zsh-snap
+	repo = /home/sjaak/.config/zsh/zsh-plugins/zsh-syntax-highlighting
+[alias]
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+[safe]
+	directory = /srv/http/innovatiepartners
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
