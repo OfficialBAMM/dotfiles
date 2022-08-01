@@ -1,0 +1,67 @@
+package com.bep3.review.application.mapper;
+
+import com.bep3.review.application.dto.UpdateReviewDTO;
+import com.bep3.review.domain.model.Review;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2021-12-14T14:54:32+0100",
+    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.50.v20210914-1429, environment: Java 17.0.1 (N/A)"
+)
+@Component
+public class ReviewMapperImpl implements ReviewMapper {
+
+    @Override
+    public UpdateReviewDTO toUpdateReviewDTO(Review review) {
+        if ( review == null ) {
+            return null;
+        }
+
+        UpdateReviewDTO updateReviewDTO = new UpdateReviewDTO();
+
+        updateReviewDTO.reviewId = review.getReviewId();
+        updateReviewDTO.orderId = review.getOrderId();
+        updateReviewDTO.rating = review.getRating();
+        updateReviewDTO.message = review.getMessage();
+
+        return updateReviewDTO;
+    }
+
+    @Override
+    public Review toReview(UpdateReviewDTO updateReviewDTO) {
+        if ( updateReviewDTO == null ) {
+            return null;
+        }
+
+        Review review = new Review();
+
+        review.setReviewId( updateReviewDTO.reviewId );
+        review.setOrderId( updateReviewDTO.orderId );
+        review.setRating( updateReviewDTO.rating );
+        review.setMessage( updateReviewDTO.message );
+
+        return review;
+    }
+
+    @Override
+    public void updateReviewFromDto(UpdateReviewDTO dto, Review entity) {
+        if ( dto == null ) {
+            return;
+        }
+
+        if ( dto.reviewId != null ) {
+            entity.setReviewId( dto.reviewId );
+        }
+        if ( dto.orderId != null ) {
+            entity.setOrderId( dto.orderId );
+        }
+        if ( dto.rating != null ) {
+            entity.setRating( dto.rating );
+        }
+        if ( dto.message != null ) {
+            entity.setMessage( dto.message );
+        }
+    }
+}

@@ -11,12 +11,6 @@ ls()
     command ls --color=auto -F "$@"
 }
 
-unalias cd >/dev/null 2>&1
-cd()
-{
-    builtin cd "$@" && command ls --color=auto -F
-}
-
 mir()
 {
     if hash reflector >/dev/null 2>&1; then
@@ -41,52 +35,6 @@ ranger()
     [[ -f $tmpf ]] && dir="$(cat "$tmpf")"
     [[ -e $tmpf ]] && rm -f "$tmpf"
     [[ -z $dir || $dir == "$PWD" ]] || builtin cd "${dir}" || return 0
-}
-
-gitpr()
-{
-    github="pull/$1/head:$2"
-    _fetchpr $github $2 $3
-}
-
-bitpr()
-{
-    bitbucket="refs/pull-requests/$1/from:$2"
-    _fetchpr $bitbucket $2 $3
-}
-
-_fetchpr()
-{
-    # shellcheck disable=2154
-    [[ $ZSH_VERSION ]] && program=${funcstack#_fetchpr} || program='_fetchpr'
-    if (( $# != 2 && $# != 3 )); then
-        printf "usage: %s <id> <branch> [remote]\n" "$program"
-        return 1
-    else
-        ref=$1
-        branch=$2
-        origin=${3:-origin}
-        if git rev-parse --git-dir &> /dev/null; then
-            git fetch $origin $ref && git checkout $branch
-        else
-            echo 'error: not in git repo'
-        fi
-    fi
-}
-
-ga()
-{
-    git add "${1:-.}"
-}
-
-gr()
-{
-    git rebase -i HEAD~${1:-10}
-}
-
-mktar()
-{
-    tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"
 }
 
 mkzip()

@@ -24,6 +24,14 @@ font:
 env:
   TERM: xterm-256color
 
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+    - -l
+    - -c
+    - "tmux"
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Import additional configuration files
@@ -445,10 +453,6 @@ env:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-shell:
-  program: /bin/zsh
-  args:
-    - --login
 
 # Startup directory
 #

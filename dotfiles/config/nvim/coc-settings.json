@@ -1,8 +1,4 @@
 {
-  "eslint.autoFixOnSave": true,
-  "coc.preferences.formatOnType": true,
-  "coc.preferences.useQuickfixForLocations": true,
-
   // coc-explorer
   // General config
   "explorer.width": 30,
@@ -30,11 +26,22 @@
   "explorer.file.cdCommand": "cd",
   "explorer.root.strategies": ["cwd"],
 
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",
     "json",
     "yml",
-    "javascript"
-  ]
+    "vue",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.autoFixOnSave": true,
+
+  // Php-Cs-Fixer
+  "php-cs-fixer.config": "/home/sjaak/sites/siteboss/laravel/.php-cs-fixer.php",
+  "php-cs-fixer.enableFormatProvider": true
 }

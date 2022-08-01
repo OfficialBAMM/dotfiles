@@ -1,0 +1,57 @@
+package com.bep3.supply.application.mapper;
+
+import com.bep3.supply.application.dto.UpdateIngredientDTO;
+import com.bep3.supply.domain.model.Ingredient;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2021-12-14T14:54:33+0100",
+    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.50.v20210914-1429, environment: Java 17.0.1 (N/A)"
+)
+@Component
+public class IngredientMapperImpl implements IngredientMapper {
+
+    @Override
+    public UpdateIngredientDTO toUpdateIngredientDTO(Ingredient ingredient) {
+        if ( ingredient == null ) {
+            return null;
+        }
+
+        UpdateIngredientDTO updateIngredientDTO = new UpdateIngredientDTO();
+
+        updateIngredientDTO.ingredientId = ingredient.getIngredientId();
+        updateIngredientDTO.name = ingredient.getName();
+
+        return updateIngredientDTO;
+    }
+
+    @Override
+    public Ingredient toIngredient(UpdateIngredientDTO updateIngredientDTO) {
+        if ( updateIngredientDTO == null ) {
+            return null;
+        }
+
+        Ingredient ingredient = new Ingredient();
+
+        ingredient.setIngredientId( updateIngredientDTO.ingredientId );
+        ingredient.setName( updateIngredientDTO.name );
+
+        return ingredient;
+    }
+
+    @Override
+    public void updateIngredientFromDto(UpdateIngredientDTO dto, Ingredient entity) {
+        if ( dto == null ) {
+            return;
+        }
+
+        if ( dto.ingredientId != null ) {
+            entity.setIngredientId( dto.ingredientId );
+        }
+        if ( dto.name != null ) {
+            entity.setName( dto.name );
+        }
+    }
+}

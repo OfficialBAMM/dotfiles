@@ -1,0 +1,99 @@
+{
+  "name": "@yaegassy/coc-nginx",
+  "version": "0.3.6",
+  "nginxLsVersion": "0.7.1",
+  "nginxFmtVersion": "1.2.2",
+  "description": "nginx-language-server extension for coc.nvim",
+  "author": "yaegassy <yosstools@gmail.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "coc.nvim"
+  ],
+  "engines": {
+    "coc": "^0.0.80"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaegassy/coc-nginx"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint src --ext ts",
+    "clean": "rimraf lib",
+    "watch": "node esbuild.js --watch",
+    "build": "node esbuild.js",
+    "prepare": "node esbuild.js"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "semi": true
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.7",
+    "@types/rimraf": "^3.0.0",
+    "@types/tmp": "^0.2.0",
+    "@types/which": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "coc.nvim": "^0.0.80",
+    "esbuild": "^0.8.42",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "tmp": "^0.1.0",
+    "typescript": "^4.1.2",
+    "which": "^2.0.2"
+  },
+  "activationEvents": [
+    "onLanguage:nginx"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "coc-nginx configuration",
+      "properties": {
+        "nginx.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable coc-nginx extension"
+        },
+        "nginx.server.commandPath": {
+          "type": "string",
+          "default": "",
+          "description": "The custom path to the nginx-language-server (Absolute path)."
+        },
+        "nginx.builtin.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Python 3.x path (Absolute path) to be used for built-in install"
+        },
+        "nginx.nginxfmt.commandPath": {
+          "type": "string",
+          "default": "",
+          "description": "The custom path to the nginxfmt (Absolute path)."
+        },
+        "nginx.nginxfmt.indent": {
+          "type": "number",
+          "default": 4,
+          "description": "Specify number of spaces for indentation"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "nginx.installLanguageServer",
+        "title": "Install/Upgrade nginx-language-server and more tools (builtin)"
+      },
+      {
+        "command": "nginx.format",
+        "title": "Run nginxfmt"
+      }
+    ]
+  }
+}

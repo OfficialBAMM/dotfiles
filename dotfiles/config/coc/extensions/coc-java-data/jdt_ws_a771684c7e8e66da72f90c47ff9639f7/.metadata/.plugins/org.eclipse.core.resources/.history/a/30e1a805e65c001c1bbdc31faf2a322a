@@ -1,0 +1,62 @@
+package com.bep3.payment.application.mapper;
+
+import com.bep3.payment.application.dto.UpdatePaymentDTO;
+import com.bep3.payment.domain.model.Payment;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2021-12-14T14:54:31+0100",
+    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.50.v20210914-1429, environment: Java 17.0.1 (N/A)"
+)
+@Component
+public class PaymentMapperImpl implements PaymentMapper {
+
+    @Override
+    public UpdatePaymentDTO toUpdatePaymentDTO(Payment payment) {
+        if ( payment == null ) {
+            return null;
+        }
+
+        UpdatePaymentDTO updatePaymentDTO = new UpdatePaymentDTO();
+
+        updatePaymentDTO.paymentId = payment.getPaymentId();
+        updatePaymentDTO.orderId = payment.getOrderId();
+        updatePaymentDTO.isPaid = payment.getIsPaid();
+
+        return updatePaymentDTO;
+    }
+
+    @Override
+    public Payment toPayment(UpdatePaymentDTO updatePaymentDTO) {
+        if ( updatePaymentDTO == null ) {
+            return null;
+        }
+
+        Payment payment = new Payment();
+
+        payment.setPaymentId( updatePaymentDTO.paymentId );
+        payment.setOrderId( updatePaymentDTO.orderId );
+        payment.setIsPaid( updatePaymentDTO.isPaid );
+
+        return payment;
+    }
+
+    @Override
+    public void updatePaymentFromDto(UpdatePaymentDTO dto, Payment entity) {
+        if ( dto == null ) {
+            return;
+        }
+
+        if ( dto.paymentId != null ) {
+            entity.setPaymentId( dto.paymentId );
+        }
+        if ( dto.orderId != null ) {
+            entity.setOrderId( dto.orderId );
+        }
+        if ( dto.isPaid != null ) {
+            entity.setIsPaid( dto.isPaid );
+        }
+    }
+}

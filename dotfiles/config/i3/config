@@ -58,7 +58,7 @@ set $WS8M2 "28"
 
 # monitors
 # 
-set $Mon2 DP2
+set $Mon2 HDMI2
 set $Mon1 eDP1
 # 
 #####################################################
@@ -242,8 +242,7 @@ assign [class="Lutris"]             $WS4M1
 
 popup_during_fullscreen smart
 
-exec --no-startup-id i3-msg 'workspace $WS1M2; exec termite; exec firefox;'
-exec --no-startup-id i3-msg 'workspace $WS2M2; exec tableplus;'
+# 
+exec --no-startup-id i3-msg 'workspace $WS1M2; exec alacritty; exec firefox;'
 exec --no-startup-id i3-msg 'workspace $WS1M1; exec spotify;'
 exec --no-startup-id i3-msg 'workspace $WS1M1; exec discord;'
-

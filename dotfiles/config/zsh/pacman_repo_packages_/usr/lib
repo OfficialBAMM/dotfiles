@@ -1,0 +1,4 @@
+packages=( ${(Q)"${(z)$(<<\EO:packages
+
+EO:packages
+)}"} )

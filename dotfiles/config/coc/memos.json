@@ -1,0 +1,29 @@
+{
+  "coc-eslint|global": {
+    "eslintAlwaysAllowExecution": true
+  },
+  "@yaegassy/coc-volar|/srv/http/siteboss": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners/react-frontend": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/home/sjaak/testing/siteboss-playgroud": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners/siteboss-fontend": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners-main": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners-main/source/siteboss/nuxt": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  },
+  "@yaegassy/coc-volar|/srv/http/innovatiepartners-main/source/siteboss/ui": {
+    "coc-volar-ts-server-path": "/home/sjaak/.config/coc/extensions/node_modules/@yaegassy/coc-volar/node_modules/typescript/lib/tsserverlibrary.js"
+  }
+}

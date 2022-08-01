@@ -72,16 +72,20 @@ let g:mapleader = "\<Space>"
 " Plugins
 call plug#begin()
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
 "-------------------------------VISUALS
 " Colorscheme
-" Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'joshdick/onedark.vim'
-
 " A thingy at the bottom
 Plug 'itchyny/lightline.vim'
 
 " Because the qoutes are funny / starts vim with a fancy screen
 Plug 'mhinz/vim-startify'
+
+" cuz we want pretty icons in tree
+Plug 'ryanoasis/vim-devicons'
 
 "-------------------------------FUNCTIONAL
 " Formatter for PHP
@@ -100,17 +104,36 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " experimental, dont know if i'll use it enough
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'idanarye/vim-merginal'
 
 " I would love an native solution, but can't find one FeelsBadMan
 Plug 'lambdalisue/suda.vim'
 
-" cuz we want pretty icons in tree
-Plug 'ryanoasis/vim-devicons'
-
 " Snippetttss
 Plug 'honza/vim-snippets'
 
+" me want fancy ui me cool 
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
+
+let g:coc_global_extensions = [
+    \'@yaegassy/coc-intelephense',
+    \'@yaegassy/coc-nginx',
+    \'@yaegassy/coc-volar',
+    \'coc-css',
+    \'coc-docker',
+    \'coc-eslint', 
+    \'coc-explorer',
+    \'coc-html', 
+    \'coc-java',
+    \'coc-json', 
+    \'coc-php-cs-fixer', 
+    \'coc-prettier', 
+    \'coc-reacy-refactor', 
+    \'coc-snippets', 
+    \'coc-tsserver'
+\]
 
 set background=dark
 colorscheme onedark
@@ -120,15 +143,6 @@ if !has('gui_running')
 endif
 
 " ------ plugin options ------
-
-""------------------- ALE
-"" The fixers ALE is allowed to use
-"let g:ale_fixers = ['eslint']
-
-"" LET ALE fix on save
-"let g:ale_fix_on_save = 1
-"------------------- END ALE
-
 
 "------------------- LIGHTLINE
 let g:lightline = {
@@ -165,8 +179,8 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> ]g <Plug>(coc-diagnostic-prev)
+nmap <silent> [g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -216,79 +230,9 @@ let g:coc_snippet_next = '<tab>'
 
 "------------------- END COC
 
-let g:php_cs_fixer_rules = " @PSR12,
-    \ no_unused_imports,
-    \ array_indentation,
-    \ align_multiline_comment,
-    \ array_syntax,
-    \ blank_line_before_statement,
-    \ cast_spaces,
-    \ clean_namespace,
-    \ class_attributes_separation,
-    \ fully_qualified_strict_types,
-    \ function_typehint_space,
-    \ include,
-    \ lowercase_cast,
-    \ magic_constant_casing,
-    \ magic_method_casing,
-    \ multiline_comment_opening_closing,
-    \ multiline_whitespace_before_semicolons,
-    \ native_function_casing,
-    \ native_function_type_declaration_casing,
-    \ no_alternative_syntax,
-    \ no_blank_lines_after_phpdoc,
-    \ no_empty_comment,
-    \ no_empty_phpdoc,
-    \ no_empty_statement,
-    \ no_extra_blank_lines,
-    \ no_short_bool_cast,
-    \ no_leading_namespace_whitespace,
-    \ no_multiline_whitespace_around_double_arrow,
-    \ no_singleline_whitespace_before_semicolons,
-    \ no_spaces_around_offset,
-    \ no_superfluous_elseif,
-    \ no_trailing_comma_in_list_call,
-    \ no_trailing_comma_in_singleline_array,
-    \ no_whitespace_before_comma_in_array,
-    \ no_useless_else,
-    \ object_operator_without_whitespace,
-    \ php_unit_method_casing,
-    \ phpdoc_add_missing_param_annotation,
-    \ phpdoc_align,
-    \ phpdoc_annotation_without_dot,
-    \ phpdoc_indent,
-    \ phpdoc_line_span,
-    \ phpdoc_no_access,
-    \ phpdoc_no_empty_return,
-    \ phpdoc_no_package,
-    \ phpdoc_order,
-    \ phpdoc_scalar,
-    \ phpdoc_separation,
-    \ phpdoc_single_line_var_spacing,
-    \ phpdoc_trim,
-    \ phpdoc_trim_consecutive_blank_line_separation,
-    \ phpdoc_types,
-    \ phpdoc_types_order,
-    \ phpdoc_var_annotation_correct_order,
-    \ phpdoc_var_without_name,
-    \ protected_to_private,
-    \ semicolon_after_instruction,
-    \ single_quote,
-    \ single_space_after_construct,
-    \ space_after_semicolon,
-    \ standardize_increment,
-    \ standardize_not_equals,
-    \ switch_continue_to_break,
-    \ trailing_comma_in_multiline,
-    \ trim_array_spaces,
-    \ unary_operator_spaces,
-    \ visibility_required,
-    \ whitespace_after_comma_in_array"
-
-let g:php_cs_fixer_cache = "/home/sjaak/.local/share/.php_cs_fixer.cache"
-
-nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
-autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+nnoremap <silent><leader>pcf :call CocAction('format')<CR>
+autocmd BufWritePost *.php silent! call CocAction('format')
 
 " ------ commands ------
 "
@@ -308,6 +252,7 @@ vnoremap C "_C
 
 " Also dont overwrite on paste, super annoying
 xnoremap p "_dP
+xnoremap P "_dP
 
 " change windows with ctrl+(hjkl)
 nnoremap <C-J> <C-W><C-J>
@@ -341,17 +286,20 @@ nnoremap <silent> <Leader>ti :tabnew<CR>
 nnoremap <silent> <Leader>tn :tabnext<CR>
 nnoremap <silent> <Leader>tf :tabfirst<CR>
 nnoremap <silent> <Leader>tp :tabprevious<CR>
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Ayy
-nnoremap <C-p> :call FZFOpen(":Files")<CR>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
 
 " Ignore filenames when recursive searching
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-nnoremap <C-f> :Ag<CR>
 nnoremap <C-n> :CocCommand explorer<CR>
 
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
 
 " ------------- Vim-vugitive
@@ -478,4 +426,3 @@ nnoremap <Leader>cw
     \   execute "%s/<C-r><C-w>/".b:sub.'/gc' <Bar>
     \   unlet b:sub <Bar>
     \ endif <CR>
-

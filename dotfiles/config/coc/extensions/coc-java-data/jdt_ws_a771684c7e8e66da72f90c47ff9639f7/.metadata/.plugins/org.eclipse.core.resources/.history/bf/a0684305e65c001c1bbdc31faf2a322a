@@ -1,0 +1,110 @@
+package com.bep3.order.application.mapper;
+
+import com.bep3.order.application.dto.CreateOrderDTO;
+import com.bep3.order.application.dto.UpdateOrderDTO;
+import com.bep3.order.domain.model.Order;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2021-12-14T14:54:30+0100",
+    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.50.v20210914-1429, environment: Java 17.0.1 (N/A)"
+)
+@Component
+public class OrderMapperImpl implements OrderMapper {
+
+    @Override
+    public CreateOrderDTO toCreateOrderDTO(Order order) {
+        if ( order == null ) {
+            return null;
+        }
+
+        CreateOrderDTO createOrderDTO = new CreateOrderDTO();
+
+        createOrderDTO.orderId = order.getOrderId();
+        createOrderDTO.accountId = order.getAccountId();
+        List<String> list = order.getDishIds();
+        if ( list != null ) {
+            createOrderDTO.dishIds = new ArrayList<String>( list );
+        }
+        createOrderDTO.isDelivery = order.getIsDelivery();
+
+        return createOrderDTO;
+    }
+
+    @Override
+    public UpdateOrderDTO toUpdateOrderDTO(Order order) {
+        if ( order == null ) {
+            return null;
+        }
+
+        UpdateOrderDTO updateOrderDTO = new UpdateOrderDTO();
+
+        updateOrderDTO.orderId = order.getOrderId();
+        updateOrderDTO.accountId = order.getAccountId();
+        List<String> list = order.getDishIds();
+        if ( list != null ) {
+            updateOrderDTO.dishIds = new ArrayList<String>( list );
+        }
+        updateOrderDTO.isDelivery = order.getIsDelivery();
+        updateOrderDTO.status = order.getStatus();
+
+        return updateOrderDTO;
+    }
+
+    @Override
+    public Order toOrder(UpdateOrderDTO updateOrderDTO) {
+        if ( updateOrderDTO == null ) {
+            return null;
+        }
+
+        Order order = new Order();
+
+        order.setOrderId( updateOrderDTO.orderId );
+        order.setAccountId( updateOrderDTO.accountId );
+        order.setIsDelivery( updateOrderDTO.isDelivery );
+        List<String> list = updateOrderDTO.dishIds;
+        if ( list != null ) {
+            order.setDishIds( new ArrayList<String>( list ) );
+        }
+        order.setStatus( updateOrderDTO.status );
+
+        return order;
+    }
+
+    @Override
+    public void updateOrderFromDto(UpdateOrderDTO dto, Order entity) {
+        if ( dto == null ) {
+            return;
+        }
+
+        if ( dto.orderId != null ) {
+            entity.setOrderId( dto.orderId );
+        }
+        if ( dto.accountId != null ) {
+            entity.setAccountId( dto.accountId );
+        }
+        if ( dto.isDelivery != null ) {
+            entity.setIsDelivery( dto.isDelivery );
+        }
+        if ( entity.getDishIds() != null ) {
+            List<String> list = dto.dishIds;
+            if ( list != null ) {
+                entity.getDishIds().clear();
+                entity.getDishIds().addAll( list );
+            }
+        }
+        else {
+            List<String> list = dto.dishIds;
+            if ( list != null ) {
+                entity.setDishIds( new ArrayList<String>( list ) );
+            }
+        }
+        if ( dto.status != null ) {
+            entity.setStatus( dto.status );
+        }
+    }
+}

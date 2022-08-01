@@ -29,6 +29,7 @@ dotfiles:
     dst: ~/.config/zsh
     upignore:
     - '*/.zcompdump'
+    - '*/histlife'
   f_xresources:
     src: Xresources
     dst: ~/.Xresources
@@ -41,6 +42,24 @@ dotfiles:
   f_gsimplecal_config:
     src: config/gsimplecal/config
     dst: ~/.config/gsimplecal/config
+  f_tmux.conf:
+    src: tmux.conf
+    dst: ~/.tmux.conf
+  f_alacritty.yml:
+    src: config/alacritty/alacritty.yml
+    dst: ~/.config/alacritty/alacritty.yml
+  f_i3_config:
+    src: config/i3/config
+    dst: ~/.config/i3/config
+  f_config.ini:
+    src: config/networkmanager-dmenu/config.ini
+    dst: ~/.config/networkmanager-dmenu/config.ini
+  d_config_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  d_config_zsh:
+    src: config/zsh
+    dst: ~/.config/zsh
 profiles:
   laptop:
     dotfiles:
@@ -58,3 +77,35 @@ profiles:
     - d_zsh
     - f_xresources
     - d_polybar
+  tux:
+    dotfiles:
+    - f_tmux.conf
+    - f_xresources_1
+    - f_alacritty.yml
+    - f_commands
+    - f_explorer-actions
+    - d_extensions
+    - f_history.json
+    - f_list-artisan-history.json
+    - f_list-commands-history.json
+    - f_list-diagnostics-history.json
+    - f_list-exploreractionlist-history.json
+    - f_list-explorerfiles-history.json
+    - f_list-extensions-history.json
+    - f_list-folders-history.json
+    - f_list-links-history.json
+    - f_list-lists-history.json
+    - f_list-location-history.json
+    - f_list-outline-history.json
+    - f_lists
+    - f_list-snippets-history.json
+    - f_list-symbols-history.json
+    - f_memos.json
+    - f_mru
+    - f_snippets-mru
+    - f_suggest.txt
+    - d_ultisnips
+    - f_i3_config
+    - f_config.ini
+    - d_config_nvim
+    - d_config_zsh
